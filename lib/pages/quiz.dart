@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
-import './widgets/question.dart';
-import './widgets/answer.dart';
+import '../widgets/question.dart';
+import '../widgets/answer.dart';
 
 class Quiz extends StatelessWidget {
   final String questionText;
-  final List<String> answers;
-  final void Function() answerQuestion;
+  final List<Map<String, Object>> answers;
+  final void Function(int score) answerQuestion;
 
   Quiz(
       {@required this.questionText,
@@ -19,8 +19,8 @@ class Quiz extends StatelessWidget {
       children: <Widget>[
         Question(questionText),
         ...answers.map((answer) => Answer(
-              text: answer,
-              onPressed: answerQuestion,
+              text: answer['text'],
+              onPressed: () => answerQuestion(answer['score']),
             ))
       ],
     );

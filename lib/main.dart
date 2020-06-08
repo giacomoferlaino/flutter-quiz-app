@@ -14,6 +14,7 @@ class QuizApp extends StatefulWidget {
 
 class _QuizAppState extends State<QuizApp> {
   var _questionIndex = 0;
+  var _totalScore = 0;
   bool finished = false;
 
   final _questions = [
@@ -35,8 +36,17 @@ class _QuizAppState extends State<QuizApp> {
     },
   ];
 
-  void _answerQuestion() {
+  void _resetQuiz() {
     setState(() {
+      finished = false;
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
+  void _answerQuestion(int score) {
+    setState(() {
+      _totalScore += score;
       if (_questionIndex == (_questions.length - 1)) {
         finished = true;
         return;
@@ -54,7 +64,7 @@ class _QuizAppState extends State<QuizApp> {
               title: Text('My first app'),
             ),
             body: finished
-                ? Result('You did it!')
+                ? Result(_totalScore, _resetQuiz)
                 : Quiz(
                     questionText: _questions[_questionIndex]['questionText'],
                     answers: _questions[_questionIndex]['answers'],
