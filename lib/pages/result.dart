@@ -26,6 +26,7 @@ class Result extends StatelessWidget {
         Text(
           _evaluateScore(score),
           style: TextStyle(fontSize: 38, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
         ),
         FlatButton(
           child: Text('Reset quiz'),
